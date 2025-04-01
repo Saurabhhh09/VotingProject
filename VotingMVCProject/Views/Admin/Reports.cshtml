@@ -1,0 +1,30 @@
+﻿@model ShowModels.TotalElection
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2 class="text-center">Choose Elections For Report</h2>
+<div style="min-height:30vh;" class="table-responsive mt-5">
+    <table class="table table-striped table-hover table-bordered" id="myTable">
+        <thead class="bg-black text-white">
+            <tr>
+                <td>Election Name</td>
+                <td>Start Date</td>
+                <td>End Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var election in Model.Elec)
+            {
+                <tr>
+                    <td>@Html.ActionLink(election.ElectionName, "ReportsByElection", "Admin", new { electionId = election.Id }, null)</td>
+                    <td>@election.startDate</td>
+                    <td>@election.endDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

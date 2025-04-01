@@ -1,0 +1,65 @@
+﻿@using ShowModels
+@model ShowCandidatesModel
+@{
+    ViewBag.Title = "Candidates";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    var electionStatus = Enum.GetValues(typeof(enumElectionStatus))
+                   .Cast<enumElectionStatus>()
+                   .Select(e => new SelectListItem
+                   {
+                       Value = ((int)e).ToString(),
+                       Text = e.ToString()
+                   }).ToList();
+}
+
+@Html.DropDownListFor(model => model.StatusId, electionStatus, "Select Election Status", new { @class = "form-select", @id = "Status" })
+<div class="spinner-border mt-3" id="loader" style="display:none; color:#ff6a00;"></div>
+
+<div class="container-fluid">
+    @if (Model.Elections.Count() > 0)
+    {
+        foreach (var election in Model.Elections)
+        {
+            <h2 class="text-center my-3">@election.ElectionName</h2>
+            <div class="row d-flex justify-content-center">
+                @foreach (var position in election.ElecPositions)
+                {
+                    <div class="col-lg-3 justify-content-around card me-3">
+                        <h4 class="card-header text-center text-dark">@position.PositionName</h4>
+                        <div class="card-body">
+                            @if (position.ElecCandidates.Count > 0)
+                            {
+                                foreach (var cand in position.ElecCandidates)
+                                {
+                                    <div class="d-flex align-items-baseline">
+                                        <p>@cand.CandidateName</p>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p class="fw-bold">Candidate not registered !!</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center fw-bold my-3">No Election Found !! </p>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#Status").change(function () {
+            $("#loader").show();
+            var selectedValue = $(this).val();
+            var url = '@Url.Action("Candidates", "Admin")' + '?electionStatusId=' + selectedValue;
+            window.location.href = url;
+        });
+    });
+</script>

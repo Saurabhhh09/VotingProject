@@ -1,0 +1,53 @@
+﻿@model ShowModels.TotalUsersModel
+
+@{
+    ViewBag.Title = "ShowUsers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-center">ShowUsers</h2>
+<h5>@ViewBag.Message</h5>
+<h6>@TempData["UpdateMessage"]</h6>
+<h6>@TempData["DeleteMessage"]</h6>
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered" id="myTable">
+        <thead>
+            <tr class="bg-dark text-light">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td>@item.First_Name</td>
+                    <td>@item.Last_Name</td>
+                    <td>@item.Email</td>
+                    <td>@item.Role</td>
+                    @{
+                        int userId;
+                        bool isUserIdValid = int.TryParse(Request.Cookies["UserId"]?.Value, out userId);
+                        if (isUserIdValid && userId == item.Id)
+                        {
+                            <td>
+                                @Html.ActionLink("Details", "ShowUsersById", new { id = item.Id }, new { @class = "btn btn-sm btn-info" })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "EditUser", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" }) |
+                                @Html.ActionLink("Details", "ShowUsersById", new { id = item.Id }, new { @class = "btn btn-sm btn-info" }) |
+                                @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

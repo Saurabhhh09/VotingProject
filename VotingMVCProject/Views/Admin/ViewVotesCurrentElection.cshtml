@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "ViewVotesCurrentElection";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-center" id="electionName"></h2>
+<div class="row">
+    <div class="col-lg-4">
+        <div id="myChart1" style="width:100%; max-width:600px; height:500px;">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div id="myChart2" style="width:100%; max-width:600px; height:500px;">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div id="myChart3" style="width:100%; max-width:600px; height:500px;">
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function ()
+    {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(loadData);
+
+
+    });
+    function loadData() {
+          $.ajax({
+              url: '@Url.Action("GetVotes", "Admin",new {})',
+              type: 'GET',
+              success: function (data) {
+                  debugger;
+                  if (data.ElectionName) {
+                      $('#electionName').text(data.ElectionName);
+                      var i = 1;
+                      data.ViewVotesPositions.forEach(function (item, index, array) {
+                          drawChart(item.ViewVoteModel, item.PositionName, 'myChart' + i);
+                          i++;
+                      });
+                  }
+                  else
+                  {
+                      $('#electionName').text("not any data in database!!");
+                  }
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          });
+    }
+
+
+    function drawChart(data1, position,divId) {
+        var data = google.visualization.arrayToDataTable(data1);
+        var options = {
+            title: position,
+            is3D: true,
+            tooltip: { isHtml: true }
+        }
+        var chart = new google.visualization.PieChart(document.getElementById(divId));
+        chart.draw(data, options);
+    }
+</script>
+
+
+

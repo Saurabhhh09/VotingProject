@@ -1,0 +1,37 @@
+﻿@model List<ShowModels.ElectionModel>
+@{
+    ViewBag.Title = "OngoingElectionsForViewCandidates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+<h2 class="text-center">Choose Election for View Candidates</h2>
+<div style="min-height:30vh;" class="mt-5">
+    <div class="row">
+        @if (Model.Count() != 0)
+        {
+            foreach (var election in Model)
+            {
+                <div class="col-lg-6 d-flex justify-content-center">
+                    <a href="#">
+                        <div class="card">
+                            <div class="card-header rounded" style="background-color:#ff6a00;"><h4 class="text-center text-white">@Html.ActionLink(election.ElectionName, "ShowCandidates", new { electionId = election.Id },new { @class = "text-white"})</h4></div>
+                            <div class="card-body">
+                                <p class="fs-5">Start Date: <span class="fw-semibold">@election.startDate</span></p>
+                                <p class="fs-5">Voting End On: <span class="fw-semibold">@election.endDate</span></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <h4>There is not any election running in current!!</h4>
+        }
+
+    </div>
+
+</div>
+
+

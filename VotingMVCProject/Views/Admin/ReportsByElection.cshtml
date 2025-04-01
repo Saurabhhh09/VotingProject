@@ -1,0 +1,49 @@
+﻿@model ShowModels.ReportsModel
+@{
+    ViewBag.Title = "ReportsByElection";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var id = ViewBag.Id;
+}
+
+<div class="">
+    <a href="@Url.Action("GeneratePdf", "Admin",new {electionId = id})" class="btn btn-success rounded-0">Download PDF</a>
+</div>
+<div class="container-fluid">
+    <h2 class="text-center" style="color:#ff6a00">@Model.ElectionName</h2>
+    <hr />
+    <div class="my-4">
+        @foreach (var positions in Model.ReportPositions)
+        {
+            <div class="row my-3">
+                <h4 class="text-center mb-3" style="color: rgb(11, 93, 102);">@positions.PositionName</h4>
+                @foreach (var candidates in positions.Candidates)
+                {
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="text-center fw-bold">@candidates.CandidateName</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-around" style="display:flex ; justify-content:space-around;">
+                                    <span class="fs-5">Voter Name</span>
+                                    <span class="fs-5">Vote Date</span>
+                                </div>
+                                <hr />
+                                @foreach (var voters in candidates.Voters)
+                                {
+                                    <div class="d-flex justify-content-around" style="display:flex ; justify-content:space-around;">
+                                        <span>@voters.VoterName</span>
+                                        <span>@voters.Date</span>
+                                    </div>
+                                }
+                                <div class="card-footer">
+                                    <p class="text-center"><span class="fw-bold" style="color:#ff6a00;">Total Votes:</span> <span class="fw-bold" style="color:rgb(10, 65, 33)">@candidates.TotalVotes</span> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

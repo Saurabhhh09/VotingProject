@@ -1,0 +1,133 @@
+﻿@model ShowModels.AdminDashboardModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div style="background-color:black" class="">
+    <h2 class="text-center text-white my-4 p-3">Admin Dashboard</h2>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- Overview Section -->
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-primary shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Total Users</h5>
+                            <p class="card-text display-4">@Model.TotalUsers</p>
+                        </div>
+                        <i class="fas fa-users fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-success shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Total Elections</h5>
+                            <p class="card-text display-4">@Model.TotalElection</p>
+                        </div>
+                        <i class="fas fa-vote-yea fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-warning shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Total Candidates</h5>
+                            <p class="card-text display-4">@Model.TotalCandidate</p>
+                        </div>
+                        <i class="fas fa-user-tie fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- User Management Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">User Management</h3>
+                    <a href="@Url.Action("ShowUsers", "Admin")" class="btn btn-primary"><i class="fas fa-users"></i> View Users</a>
+                    <a href="@Url.Action("AddUser", "Admin")" class="btn btn-success"><i class="fas fa-user-plus"></i> Add New User</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Election Management Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Election Management</h3>
+                    <a href="@Url.Action("ShowElection", "Admin")" class="btn btn-primary"><i class="fas fa-vote-yea"></i> View Elections</a>
+                    <a href="@Url.Action("AddElection", "Admin")" class="btn btn-success"><i class="fas fa-plus-circle"></i> Add New Election</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+
+        <!-- Candidate Management Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Candidate Management</h3>
+                    <a href="@Url.Action("Candidates", "Admin")" class="btn btn-primary"><i class="fas fa-user-tie"></i> View Candidates</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voting Management Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Voting Management</h3>
+                    <a href="@Url.Action("ViewVotesCurrentElection", "Admin")" class="btn btn-primary"><i class="fas fa-chart-bar"></i>View Votes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+
+        <!-- Positions Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Positions</h3>
+                    <a href="@Url.Action("AddPosition", "Admin")" class="btn btn-success"><i class="fas fa-plus-circle"></i> <!-- <i class="fas fa-bullhorn"></i> -->Add Position</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="card-title">Results and Reports</h3>
+                    <a href="@Url.Action("Results", "Admin")" class="btn btn-primary"><i class="fas fa-poll"></i> View Results</a>
+                    <a href="@Url.Action("Reports", "Admin")" class="btn btn-success"><i class="fas fa-file-alt"></i> Generate Reports</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+
+
+
+

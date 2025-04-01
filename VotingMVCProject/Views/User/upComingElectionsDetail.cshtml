@@ -1,0 +1,31 @@
+﻿@model ShowModels.HomePageModel
+@{
+    ViewBag.Title = "upComingElectionsDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<hr />
+<div class="container">
+    <h2 class="text-center">Details</h2>
+    <div id="accordion">
+        @for (int i = 0; i < Model.UpcomingElections.Count; i++)
+        {
+            var election = Model.UpcomingElections[i];
+            <div class="card">
+                <div class="card-header">
+                    <a class="btn" data-bs-toggle="collapse" href="#collapse-@i">
+                        <h5>@election.Title</h5>
+                    </a>
+                </div>
+                <div id="collapse-@i" class="collapse" data-bs-parent="#accordion">
+                    <div class="card-body">
+                        <div><span>Voting Start Date: </span>@election.StartDate</div>
+                        <div><span>Voting End Date: </span>@election.EndDate</div>
+                        <div><span>Registration Start From: </span>@election.RegistrationDate</div>
+                        
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+ 

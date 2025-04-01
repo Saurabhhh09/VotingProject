@@ -1,0 +1,52 @@
+﻿@model ShowModels.UserModel
+
+@{
+    ViewBag.Title = "User Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="text-center">User Details</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr class="bg-dark text-light">
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>@Model.Id</td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td>@Model.First_Name</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>@Model.Last_Name</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>@Model.Role</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td>@Model.Date</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

@@ -1,0 +1,68 @@
+﻿@model ShowModels.RegistrationModel
+
+@{
+    ViewBag.Title = "Registration";
+}
+
+<div class="position-relative container-fluid p-0 vh-100 text-white">
+    <div class="d-flex align-items-center justify-content-center text-white img-fluid w-100 h-100"
+         style="background: url('../Images/About.jpg') no-repeat center center; background-size:cover;">
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    </div>
+    <section class="position-absolute w-100 h-100 top-0 start-0  d-flex align-items-center justify-content-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Register for Vote
+                    </h1>
+                    <hr />
+                </div>
+                <div class="row my-2">
+                    <label class="fw-bold fs-4"> @ViewBag.Message</label>
+                    <div class="col-lg-12">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-8 col-md-8 col-sm-10">
+                                @using (Html.BeginForm("Registration", "Form", FormMethod.Post, new { @class = "w-100 d-flex justify-content-center" }))
+                                {
+                                    <div class="">
+                                        <div class="my-3">
+                                            <label for="FirstName" class="form-label">First Name:</label>
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Enter First Name" })
+                                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="my-3">
+                                            <label for="LastName" class="form-label">Last Name:</label>
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Enter Last Name" })
+                                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="my-3">
+                                            <label for="Email" class="form-label">Email:</label>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter Email" })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="my-3">
+                                            <label for="Password" class="form-label">Password:</label>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter Password", @id = "txtPass" })
+                                            <input type="checkbox" id="showPassword" onchange="document.getElementById('txtPass').type=this.checked ? 'text' : 'password'" />
+                                            <label for="showPassword" class="form-label">Show Password</label><br />
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="my-3 d-flex justify-content-around">
+                                            <input type="submit" name="button" value="Submit" class="btn btn-success px-5 rounded-0 border-1 border-dark" />
+                                            <input type="submit" name="button" value="Cancel" class="btn btn-danger px-5 rounded-0 border-1 border-dark" />
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-lg-12 d-flex justify-content-center">
+                                <p class="">Already Registered? @Html.ActionLink("Click Here","Login","Form")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

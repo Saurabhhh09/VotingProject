@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "ViewResults";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var id = ViewBag.Id;
+}
+<h1 class="text-center fw-bolder mt-5" id="electionName" style="color:#ff6a00"></h1>
+<div class="row pt-4">
+    <div class="col-lg-4  border-end">
+        <div id="myChart1" style="width:100%; max-width:600px; height:600px;">
+        </div>
+    </div>
+    <div class="col-lg-4  border-end">
+        <div id="myChart2" style="width:100%; max-width:600px; height:600px;">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div id="myChart3" style="width:100%; max-width:600px; height:600px;">
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function ()
+    {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(loadData);
+
+
+    });
+    function loadData() {
+          $.ajax({
+              url: '@Url.Action("GetResult", "Admin",new {electionId = id })',
+              type: 'GET',
+              success: function (data) {
+                  debugger;
+                  $('#electionName').text(data.ElectionName);
+                  var i = 1;
+                  data.ResultPositions.forEach(function (item, index, array) {
+                      drawChart(item.DataModels, item.PositionName, 'myChart' + i);
+                      i++;
+                  });
+              },
+              error: function (error) {
+                  console.log(error);
+              }
+          });
+    }
+
+
+    function drawChart(data1, position,divId) {
+        var data = google.visualization.arrayToDataTable(data1);
+        var options = {
+            title: position,
+            is3D: true,
+        }
+        var chart = new google.visualization.PieChart(document.getElementById(divId));
+        chart.draw(data, options);
+    }
+</script>
+

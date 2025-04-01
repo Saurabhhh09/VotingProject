@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/packages
+/VotingMVCProject/.vs
+/VotingMVCProject/bin
+/VotingMVCProject/obj
+/ShowModels/bin/Debug
+/ShowModels/obj/Debug
+/VotingDbEntity/bin/Debug
+/VotingDbEntity/obj/Debug
+
+/ShowModels/.vs

@@ -1,0 +1,79 @@
+﻿@model ShowModels.UserModel
+
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var Role = Enum.GetValues(typeof(ShowModels.EnumRole))
+               .Cast<ShowModels.EnumRole>()
+               .Select(r => new SelectListItem
+               {
+                   Value = ((int)r).ToString(),
+                   Text = r.ToString()
+               }).ToList();
+}
+
+<div class="row">
+    <div>
+        <h2 class="text-center"><span class="badge text-center px-3" style="background-color:orangered;">Edit</span></h2>
+        @Html.ActionLink("Back to List", "ShowUsers", "Admin", "", new { @class = "btn btn-success rounded-0" })
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <div class="form-horizontal col-lg-12 d-flex justify-content-center">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            <div>
+                <div class="form-group my-3">
+                    @Html.LabelFor(model => model.First_Name, htmlAttributes: new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group my-3">
+                    @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group my-3">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group my-3">
+                    @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @*@Html.EditorFor(model => model.Role, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.Role,Role,new { @class = "form-select"})
+                        @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group my-3">
+                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group my-4">
+                    <div class="col-md-offset-2 col-md-12">
+                        <input type="submit" value="Save" class="btn btn-info px-5" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

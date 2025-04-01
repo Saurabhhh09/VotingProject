@@ -1,0 +1,18 @@
+﻿#main #buttonsDiv .button a {
+    background-color: rgb(11, 93, 102);
+}
+#main #buttonsDiv #registrationButton a {
+    background-color: #e3603a;
+}
+#secondDiv #info {
+    background-color: #65999e;
+}
+#secondDiv #buttonDiv2 #button a {
+    border:1px solid #fff;
+    color:white;
+    font-weight:600;
+    background-color: rgb(11, 93, 102);
+}
+    #secondDiv #buttonDiv2 #button a:hover {
+      background-color: #000;
+    }
